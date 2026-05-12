@@ -59,27 +59,30 @@ export default function Navbar() {
           >
             Аукционы
           </Link>
+          
 
           {!user ? (
-            <Link to="/login">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl transition">
-                Войти
-              </button>
-            </Link>
-          ) : (
-            <div className="flex items-center gap-4">
-              <div className="bg-blue-100 text-blue-700 px-5 py-3 rounded-2xl font-semibold">
-                {user.first_name}
-              </div>
+              <Link to="/login">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl transition">
+                  Войти
+                </button>
+              </Link>
+            ) : (
+              <div className="flex items-center gap-4">
+                <Link to="/profile">
+                  <div className="bg-blue-100 text-blue-700 px-5 py-3 rounded-2xl font-semibold hover:bg-blue-200 transition cursor-pointer">
+                    {user.first_name}
+                  </div>
+                </Link>
 
-              <button
-                onClick={logout}
-                className="bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-2xl transition"
-              >
-                Выйти
-              </button>
-            </div>
-          )}
+                <button
+                  onClick={logout}
+                  className="bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-2xl transition"
+                >
+                  Выйти
+                </button>
+              </div>
+            )}
         </div>
       </div>
     </nav>

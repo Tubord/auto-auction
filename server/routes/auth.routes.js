@@ -150,5 +150,38 @@ router.post('/login', async (req, res) => {
     })
   }
 })
+const authMiddleware = require(
+  '../middleware/auth.middleware'
+)
+
+router.get(
+  '/me',
+  authMiddleware,
+  async (req, res) => {
+    try {
+      const user = await pool.query(
+        `
+        SELECT
+          user_id,
+          first_name,
+          last_name,
+          email,
+          role
+        FROM users
+        WHERE user_id = $1
+        `,
+        [req.user.user_id]
+      )
+
+      res.json(user.rows[0])
+    } catch (error) {
+      console.log(error)
+
+      res.status(500).json({
+        message: 'Server error',
+      })
+    }
+  }
+)
 
 module.exports = router
